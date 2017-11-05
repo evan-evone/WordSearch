@@ -5,7 +5,7 @@ from sys import argv
 import numpy as np
 
 argv = argv[1:]
-if '-db' in argv: debug = True; argv.remove('-db')
+if '-d' in argv: debug = True; argv.remove('-db')
 else: debug = False
 wsName = argv[0]
 words = argv[1:]

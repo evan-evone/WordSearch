@@ -8,7 +8,11 @@ int main(int argc, char** argv)
 
   int write_console = 0;
   for (int i = 0; i < argc; i++) {
-    if (/*check if starts with `-` and contains `d`*/) { write_console = 1; }
+    string arg = argv[i];
+    if (arg[0] == '-' && arg.find('d') < arg.length())                                      // if not in string, returns huge number
+    {
+      write_console = 1;
+    }
   }
 
   printf("%d\n", write_console);                                                            // tell `master.sh` 0 or 1, depending

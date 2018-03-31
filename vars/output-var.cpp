@@ -8,7 +8,11 @@ int main(int argc, char** argv)
 
   int last_index = -1;                                                                      // note to self: look up how to check if given value
   for (int i = 0; i < argc; i++) {
-    if (/*check if starts with `-` and contains `o`*/) { last_index = i; }
+    string arg = argv[i];
+    if (arg[0] == '-' && arg.find('o') < arg.length())                                      // if not in string, returns huge number
+    {
+      last_index = i;
+    }
   }
 
   if ( last_index == -1 ||  last_index + 1 == argc )                                        // if nonexistant or last argument

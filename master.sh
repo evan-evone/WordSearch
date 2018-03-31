@@ -5,8 +5,8 @@
 # puzzle separated by tabs and words separated by tabs
 
 declare argv
-for (( i=0; i<BASH_ARGC; i++ ));
-  do argv[$i]=${BASH_ARGV[$BASH_ARGC - $i - 1]};
+for (( i=0; i<BASH_ARGC; i++ ))
+  do argv[$i]=${BASH_ARGV[$BASH_ARGC - $i - 1]}
 done
 
 write_console=$(./vars/write_console-var.o ${argv[*]})

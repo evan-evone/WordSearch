@@ -25,8 +25,13 @@ output=$(./vars/output-var.o ${argv[*]})
 # if [ "$output" == "&1" ]; then echo "this is sample output"; else echo "this is sample output" > $output; fi
 
 input=$(./vars/input-var.o ${argv[*]})
-    #PUZZLE - $(echo input | awk -F"\t\t" '{print $1}'). Puzzle printed first, separated by tabs.
-    #WORDS - $(echo input | awk -F"\t\t" '{print $2}'). Words printed second, separated by tabs.
+puzzle=$(echo "$input" | awk -F"\t\t" '{print $1}')
+words=$(echo "$input" | awk -F"\t\t" '{print $2}')
+
+#: debug `input` variable process
+# echo $input
+# echo $puzzle
+#echo $words
 
 #writing: [output]`>$output`. May be &1 for stdout or may be path.
 # output=$(python/solve.py $1 < $2)                                                                             #$1 = string of args, separated by spaces. `sys.argv`

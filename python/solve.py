@@ -3,17 +3,19 @@
 import numpy as np
 import sys
 
-debug = False
-words = sys.argv[1::]                                                                                         # may be subject to change
+debug = eval(sys.argv[1])
+words = sys.argv[2::]
 
-directions = np.array([[[x, y] for y in range(-1, 2)] for x in range(-1, 2)]).ravel().reshape((9, 2))
-if debug: print(directions)
+directions = np.array([[x, y] for y in range(-1, 2) for x in range(-1, 2)])
+if debug: sys.stderr.write(repr(directions) + '\n')
 
 # Defining the Puzzle
-puzzle = [list(x.lower().strip()) for x in sys.stdin.readlines()]                                             # give in string form, separated by '\n'
-puzzle = np.array(puzzle)
-puzzle = np.char.upper(puzzle)
-if debug: print(puzzle)
+lines = sys.stdin.readlines()
+if debug: sys.stderr.write(repr(lines) + '\n')
+puzzle = [list(x.lower().strip()) for x in lines]
+if debug: sys.stderr.write(repr(puzzle) + '\n')
+puzzle = np.char.upper(np.array(puzzle))
+if debug: sys.stderr.write(repr(puzzle) + '\n')
 
 # Finding Words
 
@@ -22,7 +24,7 @@ solution = {}
 for word in words:
     word = word.upper()
     start = np.array(np.where(puzzle == word[0]))
-    if debug: print(start, start + directions[0].reshape(2,1), sep='\n')
+    if debug: sys.stderr.write('\n'.join([repr(start), repr(start + directions[0].reshape(2,1))]) + '\n')
 
     outcome = []
 
@@ -30,13 +32,13 @@ for word in words:
         direction = direction.reshape(2, 1)
         ins = np.array([start + (direction * x) for x in range(len(word))])
         outs = np.array([puzzle[tuple(ind % 12)] for ind in ins])
-        if debug: print(ins, outs, sep='\n\n', end='\n\n\n')
-        if debug: print()
+        if debug: sys.stderr.write('\n\n'.join([repr(ins), repr(outs)]) + '\n\n\n')
+        if debug: sys.stderr.write('\n')
         for x in range(len(outs[0])):
             out = ''.join(outs[:,x])
             if out == word:
-                if debug: print(out, x)
-                if debug: print(ins)
+                if debug: sys.stderr.write('\n'.join([repr(out), repr(x)]) + '\n')
+                if debug: sys.stderr.write(repr(ins) + '\n')
                 outcome = [ins[:,0,x], ins[:,1,x]] # Row 0 = Y; Row 1 = X
                 break
 

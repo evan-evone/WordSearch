@@ -7,7 +7,6 @@ if [ "$location" == "" ]; then
 fi
 
 if [ -f "$location/mycal" ]; then
-  echo foo
   rm "$location/wordsearch"
 fi
 

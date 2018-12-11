@@ -6,7 +6,7 @@ if [ "$location" == "" ]; then
   location='/usr/local/bin'
 fi
 
-if [ -f "$location/wordseaech" ]; then
+if [ -f "$location/wordsearch" ]; then
   rm "$location/wordsearch"
 fi
 
